@@ -1,0 +1,1858 @@
+{
+	"info": {
+		"_postman_id": "cd58e7ed-7b72-4f21-b3a5-6065411d35f9",
+		"name": "Restful-booker API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7715807"
+	},
+	"item": [
+		{
+			"name": "Auth - CreateToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('token is created', function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    var JsonData = pm.response.json();\r",
+							"    pm.environment.set(\"token\", JsonData.token)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response Content-Type should be json\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain token\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.token).to.be.a('string');\r",
+							"    pm.expect(jsonData.token).to.not.be.empty;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/auth",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Auth - CreateToken",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "27"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"1b-CIdYPwglVhM4o7XuSqqU6yn0OVw\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jan 2023 15:45:50 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": \"033932dae4c9470\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Booking - CreateBooking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Booking should be created', function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"bookingID1\",jsonData.bookingid)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response Content-Type should be json\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain bookingid\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.bookingid).to.not.be.null;\r",
+							"    pm.expect(jsonData.bookingid).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response should contain firstname\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.booking.firstname).to.not.be.null;\r",
+							"    pm.expect(jsonData.booking.firstname).to.be.a('string')\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain lastname\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.booking.lastname).to.not.be.null;\r",
+							"    pm.expect(jsonData.booking.lastname).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain totalprice\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.booking.totalprice).to.not.be.null;\r",
+							"    pm.expect(jsonData.booking.totalprice).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain depositpaid\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.booking.depositpaid).to.not.be.null;\r",
+							"    pm.expect(jsonData.booking.depositpaid).to.be.a('boolean');\r",
+							"    pm.expect(jsonData.booking.depositpaid).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain bookingdates.checkin\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.booking.bookingdates.checkin).to.not.be.null;\r",
+							"    pm.expect(jsonData.booking.bookingdates.checkin).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain bookingdates.checkout\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.booking.bookingdates.checkout).to.not.be.null;\r",
+							"    pm.expect(jsonData.booking.bookingdates.checkout).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain additionalneeds\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.booking.additionalneeds).to.not.be.null;\r",
+							"    pm.expect(jsonData.booking.additionalneeds).to.be.a('string');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\" : \"Priscila\",\r\n    \"lastname\" : \"Chueryz\",\r\n    \"totalprice\" : 954,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : \r\n    {\r\n        \"checkin\" : \"2021-05-04\",\r\n        \"checkout\" : \"2021-05-10\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/booking",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"booking"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Booking - CreateBooking",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\" : \"Priscila\",\r\n    \"lastname\" : \"Chueryz\",\r\n    \"totalprice\" : 954,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : \r\n    {\r\n        \"checkin\" : \"2021-05-04\",\r\n        \"checkout\" : \"2021-05-10\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/booking",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"booking"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "204"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"cc-bJi3DlyXTZ6J06k3uiRWe4+BzkQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jan 2023 16:10:57 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"bookingid\": 2858,\n    \"booking\": {\n        \"firstname\": \"Priscila\",\n        \"lastname\": \"Chueryz\",\n        \"totalprice\": 954,\n        \"depositpaid\": true,\n        \"bookingdates\": {\n            \"checkin\": \"2021-05-04\",\n            \"checkout\": \"2021-05-10\"\n        },\n        \"additionalneeds\": \"Breakfast\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Booking - GetBooking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Last created booking, status 200', function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response Content-Type should be json\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Person is Lucas Smith\", function() {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.firstname).to.eql(\"Priscila\");\r",
+							"  pm.expect(responseJson.lastname).to.eql(\"Chueryz\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Total price is 111\", function() {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.totalprice).to.eql(954);\r",
+							"  pm.expect(responseJson.depositpaid).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Booking dates are correct\", function() {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.bookingdates.checkin).to.eql(\"2021-05-04\");\r",
+							"  pm.expect(responseJson.bookingdates.checkout).to.eql(\"2021-05-10\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Additional needs is Breakfast\", function() {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.additionalneeds).to.eql(\"Breakfast\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/booking/{{bookingID1}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"booking",
+						"{{bookingID1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Booking - GetBooking",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/booking/{{bookingID1}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"booking",
+								"{{bookingID1}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "175"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"af-OdkaVkcIie4qnzq7wGnOOfdXWhw\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jan 2023 16:24:55 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"firstname\": \"Priscila\",\n    \"lastname\": \"Chueryz\",\n    \"totalprice\": 954,\n    \"depositpaid\": true,\n    \"bookingdates\": {\n        \"checkin\": \"2021-05-04\",\n        \"checkout\": \"2021-05-10\"\n    },\n    \"additionalneeds\": \"Breakfast\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Booking - UpdateBooking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Booking should be updated', function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response Content-Type should be json\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain firstname\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.firstname).to.not.be.null;\r",
+							"    pm.expect(jsonData.firstname).to.be.a('string')\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain lastname\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.lastname).to.not.be.null;\r",
+							"    pm.expect(jsonData.lastname).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain totalprice\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.totalprice).to.not.be.null;\r",
+							"    pm.expect(jsonData.totalprice).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain depositpaid\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.depositpaid).to.not.be.null;\r",
+							"    pm.expect(jsonData.depositpaid).to.be.a('boolean');\r",
+							"    pm.expect(jsonData.depositpaid).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain bookingdates.checkin\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.bookingdates.checkin).to.not.be.null;\r",
+							"    pm.expect(jsonData.bookingdates.checkin).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain bookingdates.checkout\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.bookingdates.checkout).to.not.be.null;\r",
+							"    pm.expect(jsonData.bookingdates.checkout).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain additionalneeds\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.additionalneeds).to.not.be.null;\r",
+							"    pm.expect(jsonData.additionalneeds).to.be.a('string');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token={{token}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"PriscilaCS\",\r\n    \"lastname\": \"Chueryz\",\r\n    \"totalprice\": 954,\r\n    \"depositpaid\": true,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2021-05-04\",\r\n        \"checkout\": \"2021-05-10\"\r\n    },\r\n    \"additionalneeds\": \"Breakfast\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/booking/{{bookingID1}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"booking",
+						"{{bookingID1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Booking - UpdateBooking",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"PriscilaCS\",\r\n    \"lastname\": \"Chueryz\",\r\n    \"totalprice\": 954,\r\n    \"depositpaid\": true,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2021-05-04\",\r\n        \"checkout\": \"2021-05-10\"\r\n    },\r\n    \"additionalneeds\": \"Breakfast\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/booking/{{bookingID1}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"booking",
+								"{{bookingID1}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "177"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"b1-ZPOmx2VQIGaDGJn7Hft/7r3RexQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jan 2023 17:23:40 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"firstname\": \"PriscilaCS\",\n    \"lastname\": \"Chueryz\",\n    \"totalprice\": 954,\n    \"depositpaid\": true,\n    \"bookingdates\": {\n        \"checkin\": \"2021-05-04\",\n        \"checkout\": \"2021-05-10\"\n    },\n    \"additionalneeds\": \"Breakfast\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Booking - PartialUpdateBooking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Booking should be partial updated', function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response Content-Type should be json\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain totalprice\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.totalprice).to.not.be.null;\r",
+							"    pm.expect(jsonData.totalprice).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain bookingdates.checkin\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.bookingdates.checkin).to.not.be.null;\r",
+							"    pm.expect(jsonData.bookingdates.checkin).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain bookingdates.checkout\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.bookingdates.checkout).to.not.be.null;\r",
+							"    pm.expect(jsonData.bookingdates.checkout).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain additionalneeds\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.additionalneeds).to.not.be.null;\r",
+							"    pm.expect(jsonData.additionalneeds).to.be.a('string');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token={{token}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"totalprice\": 800,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2021-02-04\",\r\n        \"checkout\": \"2021-05-02\"\r\n    },\r\n    \"additionalneeds\": \"Lunch\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/booking/{{bookingID1}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"booking",
+						"{{bookingID1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Booking - PartialUpdateBooking",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"totalprice\": 800,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2021-02-04\",\r\n        \"checkout\": \"2021-05-02\"\r\n    },\r\n    \"additionalneeds\": \"Lunch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/booking/{{bookingID1}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"booking",
+								"{{bookingID1}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "171"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"ab-PkePFuzx7dl4H8BwuyN0XWDtf8Y\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jan 2023 17:37:13 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"firstname\": \"Priscila\",\n    \"lastname\": \"Chueryz\",\n    \"totalprice\": 800,\n    \"depositpaid\": true,\n    \"bookingdates\": {\n        \"checkin\": \"2021-02-04\",\n        \"checkout\": \"2021-05-02\"\n    },\n    \"additionalneeds\": \"Lunch\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Booking - DeleteBooking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Booking is deleted', function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"})\r",
+							"\r",
+							"pm.test('Status code name has string',() => {\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token={{token}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/booking/{{bookingID1}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"booking",
+						"{{bookingID1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Booking - PartialUpdateBooking Copy",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/booking/{{bookingID1}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"booking",
+								"{{bookingID1}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"7-rM9AyJuqT6iOan/xHh+AW+7K/T8\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jan 2023 17:50:21 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "Created"
+				}
+			]
+		},
+		{
+			"name": "JSONserver - CreateBooking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 12,\r\n    \"firstname\" : \"Priscila\",\r\n    \"lastname\" : \"Chueryz\",\r\n    \"totalprice\" : 954,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : \r\n    {\r\n        \"checkin\" : \"2021-05-04\",\r\n        \"checkout\" : \"2021-05-10\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bookings"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "JSONserver - CreateBooking",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 12,\r\n    \"firstname\" : \"Priscila\",\r\n    \"lastname\" : \"Chueryz\",\r\n    \"totalprice\" : 954,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : \r\n    {\r\n        \"checkin\" : \"2021-05-04\",\r\n        \"checkout\" : \"2021-05-10\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/bookings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin, X-HTTP-Method-Override, Accept-Encoding"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "Location"
+						},
+						{
+							"key": "Location",
+							"value": "http://localhost:3000/bookings/12"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "227"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e3-BpQvXiYI4H1NYYmPoo5Tl++3Ivs\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jan 2023 04:01:34 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 12,\n    \"firstname\": \"Priscila\",\n    \"lastname\": \"Chueryz\",\n    \"totalprice\": 954,\n    \"depositpaid\": true,\n    \"bookingdates\": {\n        \"checkin\": \"2021-05-04\",\n        \"checkout\": \"2021-05-10\"\n    },\n    \"additionalneeds\": \"Breakfast\"\n}"
+				}
+			]
+		},
+		{
+			"name": "JSONserver - GetBooking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Last created booking, status 200', function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response Content-Type should be json\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Person is Priscila Chueryz\", function() {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.firstname).to.eql(\"Priscila\");\r",
+							"  pm.expect(responseJson.lastname).to.eql(\"Chueryz\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Total price is 111\", function() {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.totalprice).to.eql(954);\r",
+							"  pm.expect(responseJson.depositpaid).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Booking dates are correct\", function() {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.bookingdates.checkin).to.eql(\"2021-05-04\");\r",
+							"  pm.expect(responseJson.bookingdates.checkout).to.eql(\"2021-05-10\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Additional needs is Breakfast\", function() {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.additionalneeds).to.eql(\"Breakfast\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/bookings/12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bookings",
+						"12"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "JSONserver - GetBooking",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/bookings/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"bookings",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin, Accept-Encoding"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "226"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e2-SO4RMWTbkCRzQvkUpkt5LAwm7Ls\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jan 2023 04:02:39 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"firstname\": \"Priscila\",\n    \"lastname\": \"Chueryz\",\n    \"totalprice\": 954,\n    \"depositpaid\": true,\n    \"bookingdates\": {\n        \"checkin\": \"2021-05-04\",\n        \"checkout\": \"2021-05-10\"\n    },\n    \"additionalneeds\": \"Breakfast\"\n}"
+				}
+			]
+		},
+		{
+			"name": "JSONserver - UpdateBooking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Booking should be updated', function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response Content-Type should be json\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain firstname\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.firstname).to.not.be.null;\r",
+							"    pm.expect(jsonData.firstname).to.be.a('string')\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain lastname\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.lastname).to.not.be.null;\r",
+							"    pm.expect(jsonData.lastname).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain totalprice\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.totalprice).to.not.be.null;\r",
+							"    pm.expect(jsonData.totalprice).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain depositpaid\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.depositpaid).to.not.be.null;\r",
+							"    pm.expect(jsonData.depositpaid).to.be.a('boolean');\r",
+							"    pm.expect(jsonData.depositpaid).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain bookingdates.checkin\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.bookingdates.checkin).to.not.be.null;\r",
+							"    pm.expect(jsonData.bookingdates.checkin).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain bookingdates.checkout\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.bookingdates.checkout).to.not.be.null;\r",
+							"    pm.expect(jsonData.bookingdates.checkout).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain additionalneeds\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.additionalneeds).to.not.be.null;\r",
+							"    pm.expect(jsonData.additionalneeds).to.be.a('string');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token={{token}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"PriscilaCS\",\r\n    \"lastname\": \"Chueryz\",\r\n    \"totalprice\": 954,\r\n    \"depositpaid\": true,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2021-05-04\",\r\n        \"checkout\": \"2021-05-10\"\r\n    },\r\n    \"additionalneeds\": \"Breakfast\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/bookings/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bookings",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "JSONserver - UpdateBooking",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"PriscilaCS\",\r\n    \"lastname\": \"Chueryz\",\r\n    \"totalprice\": 954,\r\n    \"depositpaid\": true,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2021-05-04\",\r\n        \"checkout\": \"2021-05-10\"\r\n    },\r\n    \"additionalneeds\": \"Breakfast\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/bookings/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"bookings",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin, Accept-Encoding"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "228"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e4-4tOMtF4uhVYHyQfKxGH5Cqpex0M\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jan 2023 04:02:56 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"firstname\": \"PriscilaCS\",\n    \"lastname\": \"Chueryz\",\n    \"totalprice\": 954,\n    \"depositpaid\": true,\n    \"bookingdates\": {\n        \"checkin\": \"2021-05-04\",\n        \"checkout\": \"2021-05-10\"\n    },\n    \"additionalneeds\": \"Breakfast\",\n    \"id\": 2\n}"
+				}
+			]
+		},
+		{
+			"name": "JSONserver - PartialUpdateBooking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Booking should be partial updated', function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response Content-Type should be json\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain totalprice\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.totalprice).to.not.be.null;\r",
+							"    pm.expect(jsonData.totalprice).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain bookingdates.checkin\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.bookingdates.checkin).to.not.be.null;\r",
+							"    pm.expect(jsonData.bookingdates.checkin).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain bookingdates.checkout\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.bookingdates.checkout).to.not.be.null;\r",
+							"    pm.expect(jsonData.bookingdates.checkout).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain additionalneeds\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.additionalneeds).to.not.be.null;\r",
+							"    pm.expect(jsonData.additionalneeds).to.be.a('string');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token={{token}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"totalprice\": 800,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2021-02-04\",\r\n        \"checkout\": \"2021-05-02\"\r\n    },\r\n    \"additionalneeds\": \"Lunch\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/bookings/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bookings",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "JSONserver - PartialUpdateBooking",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"totalprice\": 800,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2021-02-04\",\r\n        \"checkout\": \"2021-05-02\"\r\n    },\r\n    \"additionalneeds\": \"Lunch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/bookings/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"bookings",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin, Accept-Encoding"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "224"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e0-ng7Ypna7S1LoXxcZruMdY86vly0\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jan 2023 04:03:13 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"firstname\": \"PriscilaCS\",\n    \"lastname\": \"Chueryz\",\n    \"totalprice\": 800,\n    \"depositpaid\": true,\n    \"bookingdates\": {\n        \"checkin\": \"2021-02-04\",\n        \"checkout\": \"2021-05-02\"\n    },\n    \"additionalneeds\": \"Lunch\",\n    \"id\": 2\n}"
+				}
+			]
+		},
+		{
+			"name": "JSONserver - PartialUpdateBooking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Booking is deleted', function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test('Status code name has string',() => {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token={{token}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/bookings/12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bookings",
+						"12"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Booking - PartialUpdateBooking Copy 2",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/bookings/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"bookings",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin, Accept-Encoding"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jan 2023 04:03:28 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "password123",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "https://restful-booker.herokuapp.com",
+			"type": "string"
+		}
+	]
+}

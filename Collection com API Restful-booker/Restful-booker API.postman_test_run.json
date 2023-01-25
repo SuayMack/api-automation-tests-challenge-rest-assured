@@ -1,0 +1,638 @@
+{
+	"id": "9a45e69a-d1d2-48c9-bde5-becea2e411ab",
+	"name": "Restful-booker API",
+	"timestamp": "2023-01-25T04:14:11.960Z",
+	"collection_id": "7715807-cd58e7ed-7b72-4f21-b3a5-6065411d35f9",
+	"folder_id": 0,
+	"environment_id": "7715807-81241ca3-be9c-4e98-874e-219499e6cdd9",
+	"totalPass": 58,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "4e8e5aff-ee5a-4eb4-a535-4365259db4f5",
+			"name": "Auth - CreateToken",
+			"url": "https://restful-booker.herokuapp.com/auth",
+			"time": 164,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"token is created": true,
+				"Response Content-Type should be json": true,
+				"Response should contain token": true
+			},
+			"testPassFailCounts": {
+				"token is created": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Content-Type should be json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain token": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				164
+			],
+			"allTests": [
+				{
+					"token is created": true,
+					"Response Content-Type should be json": true,
+					"Response should contain token": true
+				}
+			]
+		},
+		{
+			"id": "b18dee44-d16c-4127-970b-4dad293af1f3",
+			"name": "Booking - CreateBooking",
+			"url": "https://restful-booker.herokuapp.com/booking",
+			"time": 253,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Booking should be created": true,
+				"Response Content-Type should be json": true,
+				"Response should contain bookingid": true,
+				"Response should contain firstname": true,
+				"Response should contain lastname": true,
+				"Response should contain totalprice": true,
+				"Response should contain depositpaid": true,
+				"Response should contain bookingdates.checkin": true,
+				"Response should contain bookingdates.checkout": true,
+				"Response should contain additionalneeds": true
+			},
+			"testPassFailCounts": {
+				"Booking should be created": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Content-Type should be json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain bookingid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain firstname": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain lastname": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain totalprice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain depositpaid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain bookingdates.checkin": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain bookingdates.checkout": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain additionalneeds": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				253
+			],
+			"allTests": [
+				{
+					"Booking should be created": true,
+					"Response Content-Type should be json": true,
+					"Response should contain bookingid": true,
+					"Response should contain firstname": true,
+					"Response should contain lastname": true,
+					"Response should contain totalprice": true,
+					"Response should contain depositpaid": true,
+					"Response should contain bookingdates.checkin": true,
+					"Response should contain bookingdates.checkout": true,
+					"Response should contain additionalneeds": true
+				}
+			]
+		},
+		{
+			"id": "0e76bf7f-5aa1-425f-9048-99b08e9d8468",
+			"name": "Booking - GetBooking",
+			"url": "https://restful-booker.herokuapp.com/booking/4385",
+			"time": 205,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Last created booking, status 200": true,
+				"Response Content-Type should be json": true,
+				"Person is Lucas Smith": true,
+				"Total price is 111": true,
+				"Booking dates are correct": true,
+				"Additional needs is Breakfast": true
+			},
+			"testPassFailCounts": {
+				"Last created booking, status 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Content-Type should be json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Person is Lucas Smith": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Total price is 111": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Booking dates are correct": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Additional needs is Breakfast": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				205
+			],
+			"allTests": [
+				{
+					"Last created booking, status 200": true,
+					"Response Content-Type should be json": true,
+					"Person is Lucas Smith": true,
+					"Total price is 111": true,
+					"Booking dates are correct": true,
+					"Additional needs is Breakfast": true
+				}
+			]
+		},
+		{
+			"id": "7f9d4fa2-ce72-464a-b332-ce3b26b7bbee",
+			"name": "Booking - UpdateBooking",
+			"url": "https://restful-booker.herokuapp.com/booking/4385",
+			"time": 219,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Booking should be updated": true,
+				"Response Content-Type should be json": true,
+				"Response should contain firstname": true,
+				"Response should contain lastname": true,
+				"Response should contain totalprice": true,
+				"Response should contain depositpaid": true,
+				"Response should contain bookingdates.checkin": true,
+				"Response should contain bookingdates.checkout": true,
+				"Response should contain additionalneeds": true
+			},
+			"testPassFailCounts": {
+				"Booking should be updated": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Content-Type should be json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain firstname": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain lastname": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain totalprice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain depositpaid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain bookingdates.checkin": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain bookingdates.checkout": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain additionalneeds": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				219
+			],
+			"allTests": [
+				{
+					"Booking should be updated": true,
+					"Response Content-Type should be json": true,
+					"Response should contain firstname": true,
+					"Response should contain lastname": true,
+					"Response should contain totalprice": true,
+					"Response should contain depositpaid": true,
+					"Response should contain bookingdates.checkin": true,
+					"Response should contain bookingdates.checkout": true,
+					"Response should contain additionalneeds": true
+				}
+			]
+		},
+		{
+			"id": "f80e10fa-750f-4d83-a360-f313e0daf6b5",
+			"name": "Booking - PartialUpdateBooking",
+			"url": "https://restful-booker.herokuapp.com/booking/4385",
+			"time": 217,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Booking should be partial updated": true,
+				"Response Content-Type should be json": true,
+				"Response should contain totalprice": true,
+				"Response should contain bookingdates.checkin": true,
+				"Response should contain bookingdates.checkout": true,
+				"Response should contain additionalneeds": true
+			},
+			"testPassFailCounts": {
+				"Booking should be partial updated": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Content-Type should be json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain totalprice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain bookingdates.checkin": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain bookingdates.checkout": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain additionalneeds": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				217
+			],
+			"allTests": [
+				{
+					"Booking should be partial updated": true,
+					"Response Content-Type should be json": true,
+					"Response should contain totalprice": true,
+					"Response should contain bookingdates.checkin": true,
+					"Response should contain bookingdates.checkout": true,
+					"Response should contain additionalneeds": true
+				}
+			]
+		},
+		{
+			"id": "663ef3d1-4c61-40ac-b84f-b439c5d510f1",
+			"name": "Booking - DeleteBooking",
+			"url": "https://restful-booker.herokuapp.com/booking/4385",
+			"time": 167,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Booking is deleted": true,
+				"Status code name has string": true
+			},
+			"testPassFailCounts": {
+				"Booking is deleted": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code name has string": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				167
+			],
+			"allTests": [
+				{
+					"Booking is deleted": true,
+					"Status code name has string": true
+				}
+			]
+		},
+		{
+			"id": "f503ab15-abb4-4b44-bbb1-ca172ff88409",
+			"name": "JSONserver - CreateBooking",
+			"url": "http://localhost:3000/bookings",
+			"time": 49,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				49
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "f16d1b76-0dc9-4842-a119-c749426237b7",
+			"name": "JSONserver - GetBooking",
+			"url": "http://localhost:3000/bookings/12",
+			"time": 33,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Last created booking, status 200": true,
+				"Response Content-Type should be json": true,
+				"Person is Priscila Chueryz": true,
+				"Total price is 111": true,
+				"Booking dates are correct": true,
+				"Additional needs is Breakfast": true
+			},
+			"testPassFailCounts": {
+				"Last created booking, status 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Content-Type should be json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Person is Priscila Chueryz": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Total price is 111": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Booking dates are correct": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Additional needs is Breakfast": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				33
+			],
+			"allTests": [
+				{
+					"Last created booking, status 200": true,
+					"Response Content-Type should be json": true,
+					"Person is Priscila Chueryz": true,
+					"Total price is 111": true,
+					"Booking dates are correct": true,
+					"Additional needs is Breakfast": true
+				}
+			]
+		},
+		{
+			"id": "33750927-9a8c-4e2d-8701-2b93185f9938",
+			"name": "JSONserver - UpdateBooking",
+			"url": "http://localhost:3000/bookings/2",
+			"time": 19,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Booking should be updated": true,
+				"Response Content-Type should be json": true,
+				"Response should contain firstname": true,
+				"Response should contain lastname": true,
+				"Response should contain totalprice": true,
+				"Response should contain depositpaid": true,
+				"Response should contain bookingdates.checkin": true,
+				"Response should contain bookingdates.checkout": true,
+				"Response should contain additionalneeds": true
+			},
+			"testPassFailCounts": {
+				"Booking should be updated": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Content-Type should be json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain firstname": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain lastname": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain totalprice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain depositpaid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain bookingdates.checkin": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain bookingdates.checkout": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain additionalneeds": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				19
+			],
+			"allTests": [
+				{
+					"Booking should be updated": true,
+					"Response Content-Type should be json": true,
+					"Response should contain firstname": true,
+					"Response should contain lastname": true,
+					"Response should contain totalprice": true,
+					"Response should contain depositpaid": true,
+					"Response should contain bookingdates.checkin": true,
+					"Response should contain bookingdates.checkout": true,
+					"Response should contain additionalneeds": true
+				}
+			]
+		},
+		{
+			"id": "3760d216-1c62-4251-9431-59d4d8613f0f",
+			"name": "JSONserver - PartialUpdateBooking",
+			"url": "http://localhost:3000/bookings/2",
+			"time": 33,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Booking should be partial updated": true,
+				"Response Content-Type should be json": true,
+				"Response should contain totalprice": true,
+				"Response should contain bookingdates.checkin": true,
+				"Response should contain bookingdates.checkout": true,
+				"Response should contain additionalneeds": true
+			},
+			"testPassFailCounts": {
+				"Booking should be partial updated": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Content-Type should be json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain totalprice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain bookingdates.checkin": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain bookingdates.checkout": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should contain additionalneeds": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				33
+			],
+			"allTests": [
+				{
+					"Booking should be partial updated": true,
+					"Response Content-Type should be json": true,
+					"Response should contain totalprice": true,
+					"Response should contain bookingdates.checkin": true,
+					"Response should contain bookingdates.checkout": true,
+					"Response should contain additionalneeds": true
+				}
+			]
+		},
+		{
+			"id": "2ef2fb64-a26a-47a9-9714-fde2729507fa",
+			"name": "JSONserver - PartialUpdateBooking",
+			"url": "http://localhost:3000/bookings/12",
+			"time": 26,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Booking is deleted": true
+			},
+			"testPassFailCounts": {
+				"Booking is deleted": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				26
+			],
+			"allTests": [
+				{
+					"Booking is deleted": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 1385,
+	"collection": {
+		"requests": [
+			{
+				"id": "4e8e5aff-ee5a-4eb4-a535-4365259db4f5",
+				"method": "POST"
+			},
+			{
+				"id": "b18dee44-d16c-4127-970b-4dad293af1f3",
+				"method": "POST"
+			},
+			{
+				"id": "0e76bf7f-5aa1-425f-9048-99b08e9d8468",
+				"method": "GET"
+			},
+			{
+				"id": "7f9d4fa2-ce72-464a-b332-ce3b26b7bbee",
+				"method": "PUT"
+			},
+			{
+				"id": "f80e10fa-750f-4d83-a360-f313e0daf6b5",
+				"method": "PATCH"
+			},
+			{
+				"id": "663ef3d1-4c61-40ac-b84f-b439c5d510f1",
+				"method": "DELETE"
+			},
+			{
+				"id": "f503ab15-abb4-4b44-bbb1-ca172ff88409",
+				"method": "POST"
+			},
+			{
+				"id": "f16d1b76-0dc9-4842-a119-c749426237b7",
+				"method": "GET"
+			},
+			{
+				"id": "33750927-9a8c-4e2d-8701-2b93185f9938",
+				"method": "PUT"
+			},
+			{
+				"id": "3760d216-1c62-4251-9431-59d4d8613f0f",
+				"method": "PATCH"
+			},
+			{
+				"id": "2ef2fb64-a26a-47a9-9714-fde2729507fa",
+				"method": "DELETE"
+			}
+		]
+	}
+}

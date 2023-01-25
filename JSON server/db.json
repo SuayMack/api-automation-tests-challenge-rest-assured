@@ -1,0 +1,58 @@
+{
+  "users": [
+    {
+      "email": "admin@admin.com.br",
+      "password": "$2a$10$KWpFm7TZFkpAGEOI7Utbn.2QRHror2x/uFEj8Pb/OZceu0VyDg25m",
+      "id": 1
+    }
+  ],
+  "bookings": [
+    {
+      "firstname": "Prisicla",
+      "lastname": "Chueryz",
+      "totalprice": 111,
+      "depositpaid": true,
+      "bookingdates": {
+        "checkin": "2023-02-23",
+        "checkout": "2023-10-23"
+      },
+      "additionalneeds": "Breakfast"
+    },
+    {
+      "firstname": "PriscilaCS",
+      "lastname": "Chueryz",
+      "totalprice": 800,
+      "depositpaid": true,
+      "bookingdates": {
+        "checkin": "2021-02-04",
+        "checkout": "2021-05-02"
+      },
+      "additionalneeds": "Lunch",
+      "id": 2
+    },
+    {
+      "id": 6,
+      "firstname": "Priscila",
+      "lastname": "Chueryz",
+      "totalprice": 954,
+      "depositpaid": true,
+      "bookingdates": {
+        "checkin": "2021-05-04",
+        "checkout": "2021-05-10"
+      },
+      "additionalneeds": "Breakfast"
+    },
+    {
+      "id": 9,
+      "firstname": "Priscila",
+      "lastname": "Chueryz",
+      "totalprice": 954,
+      "depositpaid": true,
+      "bookingdates": {
+        "checkin": "2021-05-04",
+        "checkout": "2021-05-10"
+      },
+      "additionalneeds": "Breakfast"
+    }
+  ]
+}
